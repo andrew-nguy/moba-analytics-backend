@@ -29,7 +29,16 @@ jobs:
       - name: Run unit tests
         env:
           RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
-        run: ./gradlew test --no-daemon
+        run: ./gradlew test jacocoTestReport --no-daemon
+
+      - name: Upload JaCoCo HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-coverage-report
+          path: build/reports/jacoco/test/html
+          if-no-files-found: warn
+          retention-days: 14
 
   deploy:
     needs: test
