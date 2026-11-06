@@ -1,4 +1,4 @@
-﻿name: CI/CD
+name: CI/CD
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
 
       - name: Upload JaCoCo HTML report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: jacoco-coverage-report
           path: build/reports/jacoco/test/html
